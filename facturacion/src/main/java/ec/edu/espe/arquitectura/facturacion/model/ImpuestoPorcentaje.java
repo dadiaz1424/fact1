@@ -1,4 +1,4 @@
-package ec.edu.espe.arquitectura.facturacio.model;
+package ec.edu.espe.arquitectura.facturacion.model;
 
 import java.util.Date;
 
