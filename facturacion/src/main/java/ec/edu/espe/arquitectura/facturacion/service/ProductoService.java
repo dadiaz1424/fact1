@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import ec.edu.espe.arquitectura.facturacio.model.Producto;
+import ec.edu.espe.arquitectura.facturacion.model.Producto;
 import ec.edu.espe.arquitectura.facturacion.repository.ProductoRepository;
 import jakarta.transaction.Transactional;
 

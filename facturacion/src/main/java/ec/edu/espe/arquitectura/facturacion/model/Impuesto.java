@@ -1,4 +1,4 @@
-package ec.edu.espe.arquitectura.facturacio.model;
+package ec.edu.espe.arquitectura.facturacion.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
