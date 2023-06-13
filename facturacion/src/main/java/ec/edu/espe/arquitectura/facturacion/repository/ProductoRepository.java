@@ -14,10 +14,10 @@ public interface ProductoRepository extends JpaRepository<Producto, String>{
     List<Producto> findByNombre(String nombre);
 
     List<Producto> findByNombreLikeOrderByNombre(String nombre);
-
-    List<Producto> findByExistencia(BigDecimal existencia);
-
-    List<Producto> findByCode(String codigo);
+    
+    List<Producto> findByNombreAndExistencia(String nombre, BigDecimal existencia);
+    
+    List<Producto> findByNombreAndEstado(String nombre , String estado);
 
     Producto findByCodigo(String codigo);
 

@@ -1,5 +1,6 @@
 package ec.edu.espe.arquitectura.facturacion.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,11 +23,15 @@ public class ProductoService {
         return this.productoRepository.findById(code);
     }
 
+    public List<Producto> listByNombreAndExistencia(String nombre, BigDecimal existencia) {
+         return productoRepository.findByNombreAndExistencia(nombre,existencia);
+    }
+    
     public List<Producto> listByNombreAndEstado(String nombre, String estado) {
         if ("ACT".equals(estado)) {
-            return this.productoRepository.findByNombreLikeOrderByNombre(estado);
+            return this.productoRepository.findByNombreLikeOrderByNombre(nombre);
         } else {
-            return this.productoRepository.findByCode(estado);
+            throw new RuntimeException("No existe un producto ACTIVO con ese NOMBRE");
         }
     }
 
