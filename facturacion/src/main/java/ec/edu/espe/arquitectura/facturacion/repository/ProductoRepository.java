@@ -14,7 +14,7 @@ public interface ProductoRepository extends JpaRepository<Producto, String>{
     List<Producto> findByNombreAndEstadoLikeOrderByNombre(String nombre, String estado);
     List<Producto> findByNombreLikeOrderByNombre(String nombre);
     Producto findByCodigo(String codigo);
-    List<Producto> findByExistenciaLessThan(BigDecimal existencia);
+  
 
 
 

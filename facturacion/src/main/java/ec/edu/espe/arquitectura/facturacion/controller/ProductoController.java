@@ -38,19 +38,14 @@ public class ProductoController {
         }
     }
 
-     @GetMapping("/{name}")
+     @GetMapping("/name/{name}")
     public ResponseEntity<List<Producto>> obtaindByNombreLikeOrderByNombre(
         @PathVariable(name = "name") String name) {
             List<Producto> productos = this.productoService.listByNombre(name);
         return ResponseEntity.ok(productos);
     }
     
-      @GetMapping("/{cantidad}")
-    public ResponseEntity<List<Producto>> obtainByExistenciaLessThan(
-        @PathVariable(name = "cantidad") BigDecimal cantidad) {
-            List<Producto> productos = this.productoService.listExistencia(cantidad);
-        return ResponseEntity.ok(productos);
-    }
+
 
       @PostMapping
     public ResponseEntity<Producto> create(@RequestBody Producto producto) {

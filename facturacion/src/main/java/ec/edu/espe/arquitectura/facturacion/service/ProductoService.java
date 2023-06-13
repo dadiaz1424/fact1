@@ -29,10 +29,7 @@ public class ProductoService {
 
     }
 
-    public List<Producto> listExistencia(BigDecimal cantidad) {
 
-        return this.productoRepository.findByExistenciaLessThan(cantidad);
-    }
 
     @Transactional
     public Producto create(Producto producto) {
