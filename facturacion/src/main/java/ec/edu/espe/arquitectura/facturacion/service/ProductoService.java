@@ -18,21 +18,20 @@ public class ProductoService {
     public ProductoService(ProductoRepository productoRepository) {
         this.productoRepository = productoRepository;
     }
-    
-     public Optional<Producto> obtainByCode(String code) {
+
+    public Optional<Producto> obtainByCode(String code) {
         return this.productoRepository.findById(code);
     }
 
-    public List<Producto> listByNombreAndExistencia(String nombre, BigDecimal existencia) {
-         return productoRepository.findByNombreAndExistencia(nombre,existencia);
+    public List<Producto> listByNombre(String nombre) {
+
+        return this.productoRepository.findByNombreLikeOrderByNombre(nombre);
+
     }
-    
-    public List<Producto> listByNombreAndEstado(String nombre, String estado) {
-        if ("ACT".equals(estado)) {
-            return this.productoRepository.findByNombreLikeOrderByNombre(nombre);
-        } else {
-            throw new RuntimeException("No existe un producto ACTIVO con ese NOMBRE");
-        }
+
+    public List<Producto> listExistencia(BigDecimal cantidad) {
+
+        return this.productoRepository.findByExistenciaLessThan(cantidad);
     }
 
     @Transactional
@@ -45,19 +44,18 @@ public class ProductoService {
         }
     }
 
-   
     @Transactional
     public Producto update(Producto producto) {
         Optional<Producto> productoOpt = this.productoRepository.findById(producto.getCodigo());
         if (productoOpt.isPresent()) {
-            Producto productoTmp = productoOpt.get();  
+            Producto productoTmp = productoOpt.get();
             productoTmp.setNombre(producto.getNombre());
             productoTmp.setDescripcion(producto.getDescripcion());
             productoTmp.setPrecio(producto.getPrecio());
             productoTmp.setEstado(producto.getEstado());
             productoTmp.setIva(producto.getIva());
             productoTmp.setIce(producto.getIce());
-            this.productoRepository.save(productoTmp); //update
+            this.productoRepository.save(productoTmp); // update
             return productoTmp;
         } else {
             throw new RuntimeException("Producto que desea modificar no esta registrado");
@@ -67,18 +65,15 @@ public class ProductoService {
     @Transactional
     public void delete(String productoCode) {
         try {
-            Optional<Producto> productoOpt =  this.productoRepository.findById(productoCode);
+            Optional<Producto> productoOpt = this.productoRepository.findById(productoCode);
             if (productoOpt.isPresent()) {
                 this.productoRepository.delete(productoOpt.get());
             } else {
-                throw new RuntimeException("El prodcuto no esta registrado: "+productoCode);
+                throw new RuntimeException("El prodcuto no esta registrado: " + productoCode);
             }
         } catch (RuntimeException rte) {
-            throw new RuntimeException("No se puede eliminar el producto con Codigo: "+ productoCode, rte);
+            throw new RuntimeException("No se puede eliminar el producto con Codigo: " + productoCode, rte);
         }
     }
 
-    
-    }
-
-
+}

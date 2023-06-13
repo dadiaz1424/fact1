@@ -11,15 +11,10 @@ import java.math.BigDecimal;
 
 public interface ProductoRepository extends JpaRepository<Producto, String>{
     
-    List<Producto> findByNombre(String nombre);
-
+    List<Producto> findByNombreAndEstadoLikeOrderByNombre(String nombre, String estado);
     List<Producto> findByNombreLikeOrderByNombre(String nombre);
-    
-    List<Producto> findByNombreAndExistencia(String nombre, BigDecimal existencia);
-    
-    List<Producto> findByNombreAndEstado(String nombre , String estado);
-
     Producto findByCodigo(String codigo);
+    List<Producto> findByExistenciaLessThan(BigDecimal existencia);
 
 
 
